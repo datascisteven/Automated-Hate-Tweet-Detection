@@ -116,3 +116,4 @@ dmypy.json
 .DS_Store
 
 /split
+/py2
