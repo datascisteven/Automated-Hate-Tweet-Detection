@@ -8,7 +8,9 @@ from nltk.stem.porter import PorterStemmer
 from textblob import Word
 import pandas as pd
 import requests
-import config
+import sys
+sys.path.append("../py")
+from config import keys
 import gensim
 from nltk.stem import WordNetLemmatizer
 
@@ -35,9 +37,9 @@ def tweets_request(tweets_ids):
     df_lst = []
     
     for batch in tqdm(tweets_ids):
-        url = "https://api.twitter.com/2/tweets?ids={}&tweet.fields=created_at&expansions=author_id&user.fields=created_at".format(batch)
+        url = "https://api.twitter.com/2/tweets?ids={}&&tweet.fields=created_at,entities,geo,id,public_metrics,text&user.fields=description,entities,id,location,name,public_metrics,username".format(batch)
         payload={}
-        headers = {'Authorization': 'Bearer ' + config.bearer_token,
+        headers = {'Authorization': 'Bearer ' + keys['bearer_token'],
         'Cookie': 'personalization_id="v1_hzpv7qXpjB6CteyAHDWYQQ=="; guest_id=v1%3A161498381400435837'}
         r = requests.request("GET", url, headers=headers, data=payload)
         data = r.json()
