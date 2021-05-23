@@ -117,3 +117,6 @@ dmypy.json
 
 /split
 /py2
+
+.*
+!/.gitignore
