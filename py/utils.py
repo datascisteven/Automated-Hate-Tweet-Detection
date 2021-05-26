@@ -6,6 +6,7 @@ import re
 import nltk
 from nltk.stem.porter import PorterStemmer
 from textblob import Word
+import datetime
 import pandas as pd
 import requests
 import sys
@@ -163,7 +164,16 @@ def get_metrics(X_tr, y_tr, X_val, y_val, y_pred_tr, y_pred_val, model):
     labels = np.asarray(labels).reshape(2,2)
     sns.heatmap(cnf, annot=labels, fmt='', cmap='Blues', annot_kws={'size':16})
 
-def get_metrics(X_tr, y_tr, X_val, y_val, y_pred_tr, y_pred_val, model):
+def get_confusion(y_val, Y_pred_val):
+    cnf = confusion_matrix(y_val, Y_pred_val)
+    group_names = ['TN','FP','FN','TP']
+    group_counts = ['{0:0.0f}'.format(value) for value in cnf.flatten()]
+    group_percentages = ['{0:.2%}'.format(value) for value in cnf.flatten()/np.sum(cnf)]
+    labels = [f'{v1}\n{v2}\n{v3}' for v1, v2, v3 in zip(group_names, group_counts, group_percentages)]
+    labels = np.asarray(labels).reshape(2,2)
+    sns.heatmap(cnf, annot=labels, fmt='', cmap='Blues', annot_kws={'size':16})
+
+def get_metriks(X_tr, y_tr, X_val, y_val, y_pred_tr, y_pred_val, model):
     """
         Function to get training and validation F1, recall, precision, PR AUC scores
         Instantiate model and pass the model into function
