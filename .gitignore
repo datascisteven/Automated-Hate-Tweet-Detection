@@ -119,3 +119,4 @@ dmypy.json
 /py2
 /extra
 .vscode/settings.json
+.DS_Store
