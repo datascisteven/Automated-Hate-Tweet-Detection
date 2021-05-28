@@ -6,9 +6,12 @@ import re
 import nltk
 from nltk.stem.porter import PorterStemmer
 from textblob import Word
+import datetime
 import pandas as pd
 import requests
-import config
+import sys
+sys.path.append("../py")
+from config import keys
 import gensim
 from nltk.stem import WordNetLemmatizer
 
@@ -35,9 +38,9 @@ def tweets_request(tweets_ids):
     df_lst = []
     
     for batch in tqdm(tweets_ids):
-        url = "https://api.twitter.com/2/tweets?ids={}&tweet.fields=created_at&expansions=author_id&user.fields=created_at".format(batch)
+        url = "https://api.twitter.com/2/tweets?ids={}&&tweet.fields=created_at,entities,geo,id,public_metrics,text&user.fields=description,entities,id,location,name,public_metrics,username".format(batch)
         payload={}
-        headers = {'Authorization': 'Bearer ' + config.bearer_token,
+        headers = {'Authorization': 'Bearer ' + keys['bearer_token'],
         'Cookie': 'personalization_id="v1_hzpv7qXpjB6CteyAHDWYQQ=="; guest_id=v1%3A161498381400435837'}
         r = requests.request("GET", url, headers=headers, data=payload)
         data = r.json()
@@ -161,7 +164,16 @@ def get_metrics(X_tr, y_tr, X_val, y_val, y_pred_tr, y_pred_val, model):
     labels = np.asarray(labels).reshape(2,2)
     sns.heatmap(cnf, annot=labels, fmt='', cmap='Blues', annot_kws={'size':16})
 
-def get_metrics(X_tr, y_tr, X_val, y_val, y_pred_tr, y_pred_val, model):
+def get_confusion(y_val, Y_pred_val):
+    cnf = confusion_matrix(y_val, Y_pred_val)
+    group_names = ['TN','FP','FN','TP']
+    group_counts = ['{0:0.0f}'.format(value) for value in cnf.flatten()]
+    group_percentages = ['{0:.2%}'.format(value) for value in cnf.flatten()/np.sum(cnf)]
+    labels = [f'{v1}\n{v2}\n{v3}' for v1, v2, v3 in zip(group_names, group_counts, group_percentages)]
+    labels = np.asarray(labels).reshape(2,2)
+    sns.heatmap(cnf, annot=labels, fmt='', cmap='Blues', annot_kws={'size':16})
+
+def get_metriks(X_tr, y_tr, X_val, y_val, y_pred_tr, y_pred_val, model):
     """
         Function to get training and validation F1, recall, precision, PR AUC scores
         Instantiate model and pass the model into function
@@ -184,9 +196,7 @@ def get_metrics(X_tr, y_tr, X_val, y_val, y_pred_tr, y_pred_val, model):
     print('Train Precision: ', pr_tr)
     print('Val Precision: ', pr_val)
     print('Train PR-AUC: ', aps_tr)
-    print('ValPR-AUC: ', aps_val)
-
-
+    print('Val PR-AUC: ', aps_val)
 
 def num_of_words(df, col):
     df['word_ct'] = df[col].apply(lambda x: len(str(x).split(" ")))
@@ -204,25 +214,7 @@ def avg_word_length(df, col):
     df['avg_wrd'] = df[col].apply(lambda x: avg_word(x))
     print(df[[col, 'avg_wrd']].head())
 
-def hash_tags(df, col):
-    df['hashtags'] = df[col].apply(lambda x: len(re.split(r'#', str(x)))-1)
-    print(df[[col, 'hashtags']].head())
 
-def preprocess_tweet(df, col):
-    """
-        Remove callouts, character references (HTML characters, emojis), # in hashtags, 
-        Remove Twitter code RT and QT, URL links, punctuation, excess whitespace between
-        Lowercase all words and remove leading and trailing whitespaces
-    """
-    df[col] = df[col].apply(lambda x: re.sub(r'@[\S]+', ' ', str(x)))
-    df[col] = df[col].apply(lambda x: re.sub(r'&[\S]+?;', ' ', str(x)))
-    df[col] = df[col].apply(lambda x: re.sub(r'#', ' ', str(x)))
-    df[col] = df[col].apply(lambda x: re.sub(r'(\bRT\b|\bQT\b)', ' ', str(x)))
-    df[col] = df[col].apply(lambda x: re.sub(r'http[\S]+', ' ', str(x)))
-    df[col] = df[col].apply(lambda x: re.sub(r'[^\w\s]', r'', str(x)))
-    df[col] = df[col].apply(lambda x: " ".join(x.lower() for x in x.split()))
-    df[col] = df[col].apply(lambda x: re.sub(r'\w*\d\w*', r' ', str(x)))
-    df[col] = df[col].apply(lambda x: re.sub(r'\s\s+', ' ', str(x)))
 
 def tokenize(df, col):
     """
@@ -260,85 +252,10 @@ def lemmatization(df):
     return df['lem'].head()
 
 
-# tweet_preprocessing
 
-punctuation = '!"$%&\'()*+,-./:;<=>?[\\]^_`{|}~•@'         # define a string of punctuation symbols
-
-# Functions to clean tweets
-def remove_links(tweet):
-    """Takes a string and removes web links from it"""
-    tweet = re.sub(r'http\S+', '', tweet)   # remove http links
-    tweet = re.sub(r'bit.ly/\S+', '', tweet)  # remove bitly links
-    tweet = tweet.strip('[link]')   # remove [links]
-    tweet = re.sub(r'pic.twitter\S+','', tweet)
-    return tweet
-
-def remove_users(tweet):
-    """Takes a string and removes retweet and @user information"""
-    tweet = re.sub('(RT\s@[A-Za-z]+[A-Za-z0-9-_]+)', '', tweet)  # remove re-tweet
-    tweet = re.sub('(@[A-Za-z]+[A-Za-z0-9-_]+)', '', tweet)  # remove tweeted at
-    return tweet
-
-def remove_hashtags(tweet):
-    """Takes a string and removes any hash tags"""
-    tweet = re.sub('(#[A-Za-z]+[A-Za-z0-9-_]+)', '', tweet)  # remove hash tags
-    return tweet
-
-def remove_av(tweet):
-    """Takes a string and removes AUDIO/VIDEO tags or labels"""
-    tweet = re.sub('VIDEO:', '', tweet)  # remove 'VIDEO:' from start of tweet
-    tweet = re.sub('AUDIO:', '', tweet)  # remove 'AUDIO:' from start of tweet
-    return tweet
-
-def tokenize(tweet):
-    """Returns tokenized representation of words in lemma form excluding stopwords"""
-    result = []
-    for token in gensim.utils.simple_preprocess(tweet):
-        if token not in gensim.parsing.preprocessing.STOPWORDS \
-                and len(token) > 2:  # drops words with less than 3 characters
-            result.append(lemmatize(token))
-    return result
-
-def lemmatize(token):
-    """Returns lemmatization of a token"""
-    return WordNetLemmatizer().lemmatize(token, pos='v')
-
-def preprocess_tweet(tweet):
-    """Main master function to clean tweets, stripping noisy characters, and tokenizing use lemmatization"""
-    tweet = remove_users(tweet)
-    tweet = remove_links(tweet)
-    tweet = remove_hashtags(tweet)
-    tweet = remove_av(tweet)
-    tweet = tweet.lower()  # lower case
-    tweet = re.sub('[' + punctuation + ']+', ' ', tweet)  # strip punctuation
-    tweet = re.sub('\s+', ' ', tweet)  # remove double spacing
-    tweet = re.sub('([0-9]+)', '', tweet)  # remove numbers
-    tweet_token_list = tokenize(tweet)  # apply lemmatization and tokenization
-    tweet = ' '.join(tweet_token_list)
-    return tweet
-
-def basic_clean(tweet):
-    """Main master function to clean tweets only without tokenization or removal of stopwords"""
-    tweet = remove_users(tweet)
-    tweet = remove_links(tweet)
-    tweet = remove_hashtags(tweet)
-    tweet = remove_av(tweet)
-    tweet = tweet.lower()  # lower case
-    tweet = re.sub('[' + punctuation + ']+', ' ', tweet)  # strip punctuation
-    tweet = re.sub('\s+', ' ', tweet)  # remove double spacing
-    tweet = re.sub('([0-9]+)', '', tweet)  # remove numbers
-    tweet = re.sub('📝 …', '', tweet)
-    return tweet
 
 def tokenize_tweets(df):
-    """Main function to read in and return cleaned and preprocessed dataframe.
-    This can be used in Jupyter notebooks by importing this module and calling the tokenize_tweets() function
-    Args:
-        df = data frame object to apply cleaning to
-    Returns:
-        pandas data frame with cleaned tokens
-    """
-
+    """function to read in and return cleaned and preprocessed dataframe"""
     df['tokens'] = df.tweet.apply(preprocess_tweet)
     num_tweets = len(df)
     print('Complete. Number of Tweets that have been cleaned and tokenized : {}'.format(num_tweets))

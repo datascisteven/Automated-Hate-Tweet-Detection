@@ -117,3 +117,5 @@ dmypy.json
 
 /split
 /py2
+/extra
+.vscode/settings.json
