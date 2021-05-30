@@ -234,6 +234,46 @@ def get_metriks_2(X_tr, y_tr, X_val, y_val, y_pred_tr, y_pred_val, model):
     print('Train PR-AUC: ', aps_tr)
     print('Val PR-AUC: ', aps_val)
 
+def get_metric(X, y, y_pred, model):
+    """
+        Function to get training and validation F1, recall, precision, PR AUC scores
+        Instantiate model and pass the model into function
+        Pass X_train, y_train, X_val, Y_val datasets
+        Pass in calculated model.predict(X) for y_pred
+    """    
+    ac = accuracy_score(y, y_pred)
+    f1 = f1_score(y, y_pred)
+    rc = recall_score(y, y_pred)
+    pr = precision_score(y, y_pred)
+    prauc = aps(X, y, model)
+    
+    print('Accuracy: ', ac)
+    print('F1: ', f1)
+    print('Recall: ', rc)
+    print('Precision: ', pr)
+    print('PR-AUC: ', prauc)
+
+
+def get_metric2(X, y, y_pred, model):
+    """
+        Function to get training and validation F1, recall, precision, PR AUC scores
+        Instantiate model and pass the model into function
+        Pass X_train, y_train, X_val, Y_val datasets
+        Pass in calculated model.predict(X) for y_pred
+    """    
+    ac = accuracy_score(y, y_pred)
+    f1 = f1_score(y, y_pred)
+    rc = recall_score(y, y_pred)
+    pr = precision_score(y, y_pred)
+    prauc = aps2(X, y, model)
+    
+    print('Accuracy: ', ac)
+    print('F1: ', f1)
+    print('Recall: ', rc)
+    print('Precision: ', pr)
+    print('PR-AUC: ', prauc)
+
+
 def num_of_words(df, col):
     df['word_ct'] = df[col].apply(lambda x: len(str(x).split(" ")))
     print(df[[col, 'word_ct']])
