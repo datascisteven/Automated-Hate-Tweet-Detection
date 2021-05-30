@@ -39,12 +39,12 @@ def remove_av_qt(df, col):
     df[col] = df[col].apply(lambda x: re.sub(r'VIDEO:', '', str(x)))
     df[col] = df[col].apply(lambda x: re.sub(r'AUDIO:', '', str(x)))
 
-def collect_and_remove_links(df, col):
-    df['links'] = df[col].apply(lambda x: re.findall(r'http\S+', str(x))) 
+def remove_links(df, col):
+    # df['links'] = df[col].apply(lambda x: re.findall(r'http\S+', str(x))) 
     df[col] = df[col].apply(lambda x: re.sub(r'http\S+', '', str(x)))  # remove http links
-    df['links'] = df[col].apply(lambda x: re.findall(r'bit.ly/\S+', str(x))) 
+    # df['links'] = df[col].apply(lambda x: re.findall(r'bit.ly/\S+', str(x))) 
     df[col] = df[col].apply(lambda x: re.sub(r'bit.ly/\S+', '', str(x)))  # remove bit.ly links    
-    df.links = df.links.apply(lambda x: str(x)[1:-1]) # remove brackets around list
+    # df.links = df.links.apply(lambda x: str(x)[1:-1]) # remove brackets around list
 
 def remove_punctuation(df, col):    
     df[col] = df[col].apply(lambda x: re.sub(r'[^\w\s]', r'', str(x)))
@@ -82,7 +82,7 @@ def preprocess_tweets(df, col):
     collect_and_remove_users(df, col)
     collect_and_remove_charef(df, col)
     collect_and_remove_hashtags(df, col)
-    collect_and_remove_links(df, col)
+    remove_links(df, col)
     remove_av_qt(df, col)
     remove_punctuation(df, col)
     lowercasing(df, col)
