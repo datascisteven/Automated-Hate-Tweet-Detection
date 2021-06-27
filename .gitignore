@@ -120,3 +120,4 @@ dmypy.json
 /extra
 .vscode/settings.json
 .DS_Store
+/.vscode

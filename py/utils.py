@@ -14,6 +14,7 @@ sys.path.append("../py")
 from config import keys
 import gensim
 from nltk.stem import WordNetLemmatizer
+from nltk.corpus import stopwords
 import matplotlib.pyplot as plt
 
 
@@ -124,137 +125,66 @@ def aps2(X, y, model):
     probs = model.decision_function(X)
     return average_precision_score(y, probs)
 
-def get_metrics(X_tr, y_tr, X_val, y_val, y_pred_tr, y_pred_val, model):
+def get_metrics_confusion(X, y, y_pred, model):
     """
-        Function to get training and validation accuracy, F1, ROC AUC, recall, precision, PR AUC scores
-        Instantiate model and pass the model into function
+        Function to get accuracy, F1, ROC-AUC, recall, precision, PR-AUC scores
+        FOllowed by confusoon 
         Pass X_train, y_train, X_val, Y_val datasets
         Pass in calculated model.predict(X) for y_pred
     """
-    ac_tr = accuracy_score(y_tr, y_pred_tr)
-    ac_val= accuracy_score(y_val, y_pred_val)
-    f1_tr = f1_score(y_tr, y_pred_tr)
-    f1_val = f1_score(y_val, y_pred_val)
-    au_tr = auc(X_tr, y_tr, model)
-    au_val = auc(X_val, y_val, model)
-    rc_tr = recall_score(y_tr, y_pred_tr)
-    rc_val = recall_score(y_val, y_pred_val)
-    pr_tr = precision_score(y_tr, y_pred_tr)
-    pr_val = precision_score(y_val, y_pred_val)
-    aps_tr = aps(X_tr, y_tr, model)
-    aps_val = aps(X_val, y_val, model)
-
-    print('Train Accuracy: ', ac_tr)
-    print('Val Accuracy: ', ac_val)
-    print('Train F1: ', f1_tr)
-    print('Val F1: ', f1_val)
-    print('Train ROC-AUC: ', au_tr)
-    print('Val ROC-AUC: ', au_val)
-    print('Train Recall: ', rc_tr)
-    print('Vali Recall: ', rc_val)
-    print('Train Precision: ', pr_tr)
-    print('Val Precision: ', pr_val)
-    print('Train PR-AUC: ', aps_tr)
-    print('Val PR-AUC: ', aps_val)
-    
-    cnf = confusion_matrix(y_val, y_pred_val)
-    group_names = ['TN','FP','FN','TP']
-    group_counts = ['{0:0.0f}'.format(value) for value in cnf.flatten()]
-    group_percentages = ['{0:.2%}'.format(value) for value in cnf.flatten()/np.sum(cnf)]
-    labels = [f'{v1}\n{v2}\n{v3}' for v1, v2, v3 in zip(group_names, group_counts, group_percentages)]
-    labels = np.asarray(labels).reshape(2,2)
-    fig, ax = plt.subplots(figsize=(4,4))
-    sns.heatmap(cnf, annot=labels, fmt='', cmap='Blues', annot_kws={'size':14}, cbar=False, xticklabels=False, yticklabels=False)
-
-def get_confusion(y_val, Y_pred_val):
-    cnf = confusion_matrix(y_val, Y_pred_val)
-    group_names = ['TN','FP','FN','TP']
-    group_counts = ['{0:0.0f}'.format(value) for value in cnf.flatten()]
-    group_percentages = ['{0:.2%}'.format(value) for value in cnf.flatten()/np.sum(cnf)]
-    labels = [f'{v1}\n{v2}\n{v3}' for v1, v2, v3 in zip(group_names, group_counts, group_percentages)]
-    labels = np.asarray(labels).reshape(2,2)
-    fig, ax = plt.subplots(figsize=(4,4))
-    sns.heatmap(cnf, annot=labels, fmt='', cmap='Blues', annot_kws={'size':14}, cbar=False, xticklabels=False, yticklabels=False)
-
-def get_metriks(X_tr, y_tr, X_val, y_val, y_pred_tr, y_pred_val, model):
-    """
-        Function to get training and validation F1, recall, precision, PR AUC scores
-        Instantiate model and pass the model into function
-        Pass X_train, y_train, X_val, Y_val datasets
-        Pass in calculated model.predict(X) for y_pred
-    """    
-    ac_tr = accuracy_score(y_tr, y_pred_tr)
-    ac_val= accuracy_score(y_val, y_pred_val)
-    f1_tr = f1_score(y_tr, y_pred_tr)
-    f1_val = f1_score(y_val, y_pred_val)
-    rc_tr = recall_score(y_tr, y_pred_tr)
-    rc_val = recall_score(y_val, y_pred_val)
-    pr_tr = precision_score(y_tr, y_pred_tr)
-    pr_val = precision_score(y_val, y_pred_val)
-    aps_tr = aps(X_tr, y_tr, model)
-    aps_val = aps(X_val, y_val, model)
-    
-    print('Train Accuracy: ', ac_tr)
-    print('Val Accuracy: ', ac_val)    
-    print('Train F1: ', f1_tr)
-    print('Val F1: ', f1_val)
-    print('Train Recall: ', rc_tr)
-    print('Val Recall: ', rc_val)
-    print('Train Precision: ', pr_tr)
-    print('Val Precision: ', pr_val)
-    print('Train PR-AUC: ', aps_tr)
-    print('Val PR-AUC: ', aps_val)
-
-def get_metriks_2(X_tr, y_tr, X_val, y_val, y_pred_tr, y_pred_val, model):
-    """
-        Function to get training and validation F1, recall, precision, PR AUC scores
-        Instantiate model and pass the model into function
-        Pass X_train, y_train, X_val, Y_val datasets
-        Pass in calculated model.predict(X) for y_pred
-    """    
-    ac_tr = accuracy_score(y_tr, y_pred_tr)
-    ac_val= accuracy_score(y_val, y_pred_val)
-    f1_tr = f1_score(y_tr, y_pred_tr)
-    f1_val = f1_score(y_val, y_pred_val)
-    rc_tr = recall_score(y_tr, y_pred_tr)
-    rc_val = recall_score(y_val, y_pred_val)
-    pr_tr = precision_score(y_tr, y_pred_tr)
-    pr_val = precision_score(y_val, y_pred_val)
-    aps_tr = aps2(X_tr, y_tr, model)
-    aps_val = aps2(X_val, y_val, model)
-    
-    print('Train Accuracy: ', ac_tr)
-    print('Val Accuracy: ', ac_val)    
-    print('Train F1: ', f1_tr)
-    print('Val F1: ', f1_val)
-    print('Train Recall: ', rc_tr)
-    print('Val Recall: ', rc_val)
-    print('Train Precision: ', pr_tr)
-    print('Val Precision: ', pr_val)
-    print('Train PR-AUC: ', aps_tr)
-    print('Val PR-AUC: ', aps_val)
-
-def get_metric(X, y, y_pred, model):
-    """
-        Function to get training and validation F1, recall, precision, PR AUC scores
-        Instantiate model and pass the model into function
-        Pass X_train, y_train, X_val, Y_val datasets
-        Pass in calculated model.predict(X) for y_pred
-    """    
-    ac = accuracy_score(y, y_pred)
+    acc = accuracy_score(y, y_pred)
     f1 = f1_score(y, y_pred)
-    rc = recall_score(y, y_pred)
-    pr = precision_score(y, y_pred)
-    prauc = aps(X, y, model)
+    roc_auc = auc(X, y, model)
+    rec = recall_score(y, y_pred)
+    prec = precision_score(y, y_pred)
+    pr_auc = aps(X, y, model)
+
+    print('Accuracy: ', acc)
+    print('F1 Score: ', f1)
+    print('ROC-AUC: ', roc_auc)
+    print('Recall: ', rec)
+    print('Precision: ', prec)
+    print('PR-AUC: ', pr_auc)
     
-    print('Accuracy: ', ac)
+    cnf = confusion_matrix(y, y_pred)
+    group_names = ['TN','FP','FN','TP']
+    group_counts = ['{0:0.0f}'.format(value) for value in cnf.flatten()]
+    group_percentages = ['{0:.2%}'.format(value) for value in cnf.flatten()/np.sum(cnf)]
+    labels = [f'{v1}\n{v2}\n{v3}' for v1, v2, v3 in zip(group_names, group_counts, group_percentages)]
+    labels = np.asarray(labels).reshape(2,2)
+    fig, ax = plt.subplots(figsize=(4,4))
+    sns.heatmap(cnf, annot=labels, fmt='', cmap='Blues', annot_kws={'size':14}, cbar=False, xticklabels=False, yticklabels=False)
+
+def get_confusion(y, y_pred):
+    cnf = confusion_matrix(y, y_pred)
+    group_names = ['TN','FP','FN','TP']
+    group_counts = ['{0:0.0f}'.format(value) for value in cnf.flatten()]
+    group_percentages = ['{0:.2%}'.format(value) for value in cnf.flatten()/np.sum(cnf)]
+    labels = [f'{v1}\n{v2}\n{v3}' for v1, v2, v3 in zip(group_names, group_counts, group_percentages)]
+    labels = np.asarray(labels).reshape(2,2)
+    fig, ax = plt.subplots(figsize=(4,4))
+    sns.heatmap(cnf, annot=labels, fmt='', cmap='Blues', annot_kws={'size':14}, cbar=False, xticklabels=False, yticklabels=False)
+
+def get_metrics(X, y, y_pred, model):
+    """
+        Function to get training and validation F1, recall, precision, PR AUC scores
+    """    
+    acc = accuracy_score(y, y_pred)
+    f1 = f1_score(y, y_pred)
+    rec = recall_score(y, y_pred)
+    prec = precision_score(y, y_pred)
+    roc_auc = auc(X, y, model)
+    pr_auc = aps(X, y, model)
+    
+    print('Accuracy: ', acc)
     print('F1: ', f1)
-    print('Recall: ', rc)
-    print('Precision: ', pr)
-    print('PR-AUC: ', prauc)
+    print('Recall: ', rec)
+    print('Precision: ', prec)
+    print('ROC-AUC: ', roc_auc)
+    print('PR-AUC: ', pr_auc)
 
 
-def get_metric2(X, y, y_pred, model):
+def get_metrics_2(X, y, y_pred, model):
     """
         Function to get training and validation F1, recall, precision, PR AUC scores
         Instantiate model and pass the model into function
@@ -273,7 +203,6 @@ def get_metric2(X, y, y_pred, model):
     print('Precision: ', pr)
     print('PR-AUC: ', prauc)
 
-
 def num_of_words(df, col):
     df['word_ct'] = df[col].apply(lambda x: len(str(x).split(" ")))
     print(df[[col, 'word_ct']])
@@ -291,7 +220,6 @@ def avg_word_length(df, col):
     print(df[[col, 'avg_wrd']].head())
 
 
-
 def tokenize(df, col):
     """
         Function to tokenize column of strings without punctuation
@@ -302,7 +230,7 @@ def tokenize(df, col):
     tokens = nltk.word_tokenize(text)
     return tokens
 
-from nltk.corpus import stopwords
+
 stop_words = set(stopwords.words('english'))
 def no_stopwords(text):
     lst = [word for word in text if word not in stop_words]
