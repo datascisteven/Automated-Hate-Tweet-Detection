@@ -203,6 +203,21 @@ def get_metrics_2(X, y, y_pred, model):
     print('Precision: ', pr)
     print('PR-AUC: ', prauc)
 
+def get_metrics_3(X, y, y_pred, model):
+    acc = accuracy_score(y, y_pred)
+    print('Accuracy: ', acc)
+    f1 = f1_score(y, y_pred, average="binary", pos_label="1")
+    print('F1: ', f1)
+    rec = recall_score(y, y_pred, average="binary", pos_label="1")
+    print('Recall: ', rec)
+    prec = precision_score(y, y_pred, average="binary", pos_label="1")
+    print('Precision: ', prec)
+    y_probs = model.predict_proba(X)[:,1] 
+    roc_auc = roc_auc_score(y, y_probs)
+    print('ROC-AUC: ', roc_auc)
+    pr_auc = average_precision_score(y, y_probs, pos_label="1")
+    print('PR-AUC: ', pr_auc)
+
 def num_of_words(df, col):
     df['word_ct'] = df[col].apply(lambda x: len(str(x).split(" ")))
     print(df[[col, 'word_ct']])
@@ -264,3 +279,31 @@ def tokenize_tweets(df):
     num_tweets = len(df)
     print('Complete. Number of Tweets that have been cleaned and tokenized : {}'.format(num_tweets))
     return df
+
+
+def plot_confusion_matrix(cm, title='Confusion matrix', cmap=plt.cm.Blues):
+    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+    tick_marks = np.arange(len(my_tags))
+    target_names = my_tags
+    plt.xticks(tick_marks, target_names, rotation=45)
+    plt.yticks(tick_marks, target_names)
+    plt.tight_layout()
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
+
+def evaluate_prediction(predictions, target, title="Confusion matrix"):
+    print('accuracy %s' % accuracy_score(target, predictions))
+    cm = confusion_matrix(target, predictions, labels=my_tags)
+    print('confusion matrix\n %s' % cm)
+    print('(row=expected, col=predicted)')
+    
+    cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+    plot_confusion_matrix(cm_normalized, title + ' Normalized')
+
+def predict(vectorizer, classifier, data):
+    data_features = vectorizer.transform(data['plot'])
+    predictions = classifier.predict(data_features)
+    target = data['tag']
+    evaluate_prediction(predictions, target)
