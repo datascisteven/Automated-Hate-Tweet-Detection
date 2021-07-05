@@ -35,7 +35,7 @@ def group_list(lst, size=100):
 
 def tweets_request(tweets_ids):
     """
-    Make a requests to Tweeter API
+    Make a request to Tweeter API
     """
     df_lst = []
     

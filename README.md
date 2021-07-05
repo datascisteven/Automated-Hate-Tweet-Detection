@@ -24,17 +24,32 @@ This dataset was collected to investigate large scale crowdsourcing and characte
 
 **University of Copenhagen Dataset:**
 
-This dataset was collected to investigate predictive features for hate speech detection on Twitter.  There were 3 categories of tweets:  sexism, racism, and none.  I subsetted the sexism and racism tweets to add 5347 instances of the minority class
+This dataset was collected to investigate predictive features for hate speech detection on Twitter.  There were 3 categories of tweets:  sexism, racism, and none.  I subsetted the sexism and racism tweets to add 5347 instances of the minority class.
+
+**HASOC 2019 Dataset:**
+
+This HASOC or Hate Speech and Offensive Content dataset was part of a multinational effort to faciliate hate tweet detection through achine learning in other Indo-European langauges since most of the work has been conducted in English.  There were datasets collected in Hindi and German.
+
+The English dataset contained 
+
 
 I started with this dataset.....
 
 
 
-Aristotle University Dataset:  Founta, A., Djouvas, C., Chatzakou, D., Leontiadis, I., Blackburn, J., Stringhini, G., Vakali, A., Sirivianos, M. and Kourtellis, N., 2018. Large Scale Crowdsourcing and Characterization of Twitter Abusive Behavior \[Data file\]. ArXiv. Retrieved from: https://dataverse.mpi-sws.org/dataset.xhtml?persistentId=doi:10.5072/FK2/ZDTEMN
+References:
 
-Publication: https://arxiv.org/pdf/1802.00393.pdf
+Davidson, T., Warmsley, D., Macy, M., & Weber, I. (2017). Automated Hate Speech Detection and the Problem of Offensive Language. ICWSM.
+
+Founta, A., Djouvas, C., Chatzakou, D., Leontiadis, I., Blackburn, J., Stringhini, G., Vakali, A., Sirivianos, M., & Kourtellis, N. (2018). Large Scale Crowdsourcing and Characterization of Twitter Abusive Behavior. ArXiv, abs/1802.00393. https://arxiv.org/pdf/1802.00393.pdf
+
+Waseem, Z., & Hovy, D. (2016). Hateful Symbols or Hateful People? Predictive Features for Hate Speech Detection on Twitter. SRW@HLT-NAACL. https://www.aclweb.org/anthology/N16-2013.pdf
+
+Mandl, T., Modha, S., Majumder, P., Patel, D., Dave, M., Mandalia, C., & Patel, A. (2019). Overview of the HASOC track at FIRE 2019: Hate Speech and Offensive Content Identification in Indo-European Languages. Proceedings of the 11th Forum for Information Retrieval Evaluation. http://ceur-ws.org/Vol-2517/T3-1.pdf
+
+Aristotle University Dataset:  Founta, A., Djouvas, C., Chatzakou, D., Leontiadis, I., Blackburn, J., Stringhini, G., Vakali, A., Sirivianos, M. and Kourtellis, N., 2018. Large Scale Crowdsourcing and Characterization of Twitter Abusive Behavior \[Data file\]. ArXiv. Retrieved from: https://dataverse.mpi-sws.org/dataset.xhtml?persistentId=doi:10.5072/FK2/ZDTEMN
 
 University of Copenhagen Dataset:  Waseem, Z., Hovy, D. (2016). Hateful Symbols or Hateful People? Predictive Features for Hate Speech Detection on Twitter \[Data file\]. In: *Proceedings of the NAACL Student Research Workshop*. San Diego, Calfornia: Association for Computational Linguistics, pages 88-93. Retrieved from: https://github.com/ZeerakW/hatespeech.
 
-Publication:  https://www.aclweb.org/anthology/N16-2013.pdf
+
 
