@@ -271,8 +271,6 @@ def lemmatization(df):
     return df['lem'].head()
 
 
-
-
 def tokenize_tweets(df):
     """function to read in and return cleaned and preprocessed dataframe"""
     df['tokens'] = df.tweet.apply(preprocess_tweet)

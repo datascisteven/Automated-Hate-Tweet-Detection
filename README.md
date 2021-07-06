@@ -2,7 +2,7 @@
 
 **Author:**  Steven Yan
 
-This project builds off of my joint project Twitter-Sentiment-Analysis with Ivan 
+*This project builds off of my joint project with Ivan Zarharchuk,  Twitter-Sentiment-Analysis, located at <a href="https://github.com/datascisteven/Twitter-Sentiment-Analysis">here</a>.*  
 
 # Introduction:
 
@@ -18,6 +18,12 @@ Sparked by the alarming nature of recent events, social media platforms have alr
 
 # Data Sources:
 
+**Davidson Dataset:**
+
+This is the original dataset I started with due to its availability with the actual text of the hate tweets.  I wanted to start working on the project ahead of getting approved for the Twitter developer account. 
+
+The Davidson Dataset contains 24,802 tweets with 5.77% labeled as hate, 77.43% as offensive, and 16.80% as Neutral using crowdsourcing for annotating the tweets into the 3 classes. 
+
 **Aristotle University Dataset:**
 
 This dataset was collected to investigate large scale crowdsourcing and characterization of Twitter abusive behavior.  There were four categories of tweets identified: normal, spam, abusive and hateful.  I subsetted the hateful tweets to add 3635 more instances of the minority class.  The dataset contains tweet ID numbers to allow us to use Twitter API to download the tweet text and metadata.
@@ -30,14 +36,57 @@ This dataset was collected to investigate predictive features for hate speech de
 
 This HASOC or Hate Speech and Offensive Content dataset was part of a multinational effort to faciliate hate tweet detection through achine learning in other Indo-European langauges since most of the work has been conducted in English.  There were datasets collected in Hindi and German.
 
-The English dataset contained 
+**Data Understanding:**
+
+*Here are the visualizations for the top 25 tokens for training hate and non-hate tweets:*
+
+<img src="images/freq_dist_zero.png">
+ 
+<img src="images/freq_dist_one.png">
+
+Some of the top words in the negative class are: 'bitch', 'hoe', 'pussy', 'fuck', 'nigga', 'shit', and 'ass', but all those mentioned with some in lesser frequency are represented also in the positive class. It appears 'bitch' may often be used for offensive or neutral tweets than hate tweets. No single sexist epithet is used exclusively to espouse sexism.   
+
+'bitch' appears in a much greater proportion in non-hate tweets in over 8000 tweets out of 17514 tweets versus just over 200 out of 1072 tweets. 'trash' appears in non-hate subset without 'white', but 'white' and 'trash' appears in somewhat equal proportion in the hate subset.
+
+The following words, 'nigger(s)', 'white' ('trash'), 'retard', 'queer', 'gay', 'fag' and 'faggot', 'hate' are almost exclusively in the positive class.
+
+<img src="images/tsne_zero.png">
+
+<img src="images/tsne_one.png">
+
+These visualizations further illustrate the strong overlap of the words that appears in both datasets and demonstrate the importance of vectorizing the tweets with representations other than Bag of Words, which consists of a collection of unigrams or singular words. It is unable to capture phrases and multiword expressions
+
+*Here is the initial target variable distribution with the Davidson dataset with 23353 non-hate tweets and 1430 hate tweets.*
+
+<img src="images/target_distribution.png">
+
+I incorporated additional minority class tweets from three additional dataset: Aristotle University, University of Copenhagen, and HASOC 2019.  I looked for diversity in choosing the dataset to increase the generalizability of the model.
+  
+**Modeling:**
+
+*With Unbalanced Dataset:*
+1. Multinomial Naive Bayes
+2. Random Forest
+3. Logistic Regression
+4. Support Vector Machine
+5. Adaboost Classifier
+6. Gradient Boost Classifier
+7. Resampling
+   - Random Under Sampler
+   - Condensed Nearest Neighbour
+   - SMOTE-ENN
+
+*With More Balanced Dataset:*
+8.  Same 6 base algorithms
+9.  Doc2Vec DBOW
+10. Doc2Vec DMM
+11. Neural Networks (Coming soon...)
+
+**Results:**:
 
 
-I started with this dataset.....
 
-
-
-References:
+**References:**
 
 Davidson, T., Warmsley, D., Macy, M., & Weber, I. (2017). Automated Hate Speech Detection and the Problem of Offensive Language. ICWSM.
 

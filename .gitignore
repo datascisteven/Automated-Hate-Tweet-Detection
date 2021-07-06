@@ -121,3 +121,4 @@ dmypy.json
 .vscode/settings.json
 .DS_Store
 /.vscode
+spaCy/
