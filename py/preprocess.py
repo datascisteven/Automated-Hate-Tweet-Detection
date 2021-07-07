@@ -15,23 +15,31 @@ import gensim
 from nltk.stem import WordNetLemmatizer
 
 
-def collect_and_remove_users(df, col):
-    df['retweets'] = df[col].apply(lambda x: re.findall(r'(RT\s@[A-Za-z]+[A-Za-z0-9-_]+)', str(x)))
+def remove_users(df, col):
+    """
+    Function to remove usernames in retweets and callouts
+    df: name of dataframe
+    col: name of column containing Twitter text
+    """
     df[col] = df[col].apply(lambda x: re.sub(r'(RT\s@[A-Za-z]+[A-Za-z0-9-_]+)', '', str(x))) # remove re-tweet
-    df.retweets = df.retweets.apply(lambda x: str(x)[1:-1])
-    df['callouts'] = df[col].apply(lambda x: re.findall(r'(@[A-Za-z0-9-_]+)', str(x)))
     df[col] = df[col].apply(lambda x: re.sub(r'(@[A-Za-z0-9-_]+)', '', str(x))) # remove tweeted at
-    df.callouts = df.callouts.apply(lambda x: str(x)[1:-1])
 
-def collect_and_remove_charef(df, col):
-    df['charref'] = df[col].apply(lambda x: re.findall(r'&[\S]+?;', str(x)))
+def remove_charef(df, col):
+    """
+    Function to remove character references
+    df: name of dataframe
+    col: name of column containing Twitter text   
+    """
     df[col] = df[col].apply(lambda x: re.sub(r'&[\S]+?;', '', str(x)))
-    df.charref = df.charref.apply(lambda x: str(x)[1:-1])
 
-def collect_and_remove_hashtags(df, col):
-    df['hashtags'] = df[col].apply(lambda x: re.findall(r'(#[A-Za-z]+[A-Za-z0-9-_]+)', str(x)))
+
+def remove_hashtags(df, col):
+    """
+    Function to remove the hash from hashtags
+    df: name of dataframe
+    col: name of column containing Twitter text     
+    """
     df[col] = df[col].apply(lambda x: re.sub(r'#', ' ', str(x)))
-    df.hashtags = df.hashtags.apply(lambda x: str(x)[1:-1])
 
 def remove_av_qt(df, col):
     """Takes a column of strings in Pandas dataframe and removes AUDIO/VIDEO tags or labels"""    

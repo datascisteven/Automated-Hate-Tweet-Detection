@@ -71,20 +71,23 @@ I incorporated additional minority class tweets from three additional dataset: A
 4. Support Vector Machine
 5. Adaboost Classifier
 6. Gradient Boost Classifier
-7. Resampling
+7. Resampling Techniques
    - Random Under Sampler
    - Condensed Nearest Neighbour
    - SMOTE-ENN
 
 *With More Balanced Dataset:*
+
 8.  Same 6 base algorithms
 9.  Doc2Vec DBOW
 10. Doc2Vec DMM
 11. Neural Networks (Coming soon...)
 
+The new balanced dataset contained 23353 non-hate tweets and 11784 hate tweets.
+
 **Results:**:
 
-
+With the balanced dataset, 
 
 **References:**
 
