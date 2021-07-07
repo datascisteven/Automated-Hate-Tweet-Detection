@@ -2,7 +2,7 @@
 
 **Author:**  Steven Yan
 
-*This project builds off of my joint project with Ivan Zarharchuk,  Twitter-Sentiment-Analysis, located at <a href="https://github.com/datascisteven/Twitter-Sentiment-Analysis">here</a>.*  
+*This project builds off of my joint project with Ivan Zarharchuk,  Twitter-Sentiment-Analysis, located <a href="https://github.com/datascisteven/Twitter-Sentiment-Analysis">here</a>.*  
 
 # Introduction:
 
@@ -36,13 +36,13 @@ This dataset was collected to investigate predictive features for hate speech de
 
 This HASOC or Hate Speech and Offensive Content dataset was part of a multinational effort to faciliate hate tweet detection through achine learning in other Indo-European langauges since most of the work has been conducted in English.  There were datasets collected in Hindi and German.
 
-**Data Understanding:**
+# Data Understanding:
 
 *Here are the visualizations for the top 25 tokens for training hate and non-hate tweets:*
 
-<img src="images/freq_dist_zero.png">
+<center><img src="images/freq_dist_zero.png"></center>
  
-<img src="images/freq_dist_one.png">
+<center><img src="images/freq_dist_one.png"></center>
 
 Some of the top words in the negative class are: 'bitch', 'hoe', 'pussy', 'fuck', 'nigga', 'shit', and 'ass', but all those mentioned with some in lesser frequency are represented also in the positive class. It appears 'bitch' may often be used for offensive or neutral tweets than hate tweets. No single sexist epithet is used exclusively to espouse sexism.   
 
@@ -50,21 +50,22 @@ Some of the top words in the negative class are: 'bitch', 'hoe', 'pussy', 'fuck'
 
 The following words, 'nigger(s)', 'white' ('trash'), 'retard', 'queer', 'gay', 'fag' and 'faggot', 'hate' are almost exclusively in the positive class.
 
-<img src="images/tsne_zero.png">
-
-<img src="images/tsne_one.png">
+<center><img src="images/tsne.png"></center>
 
 These visualizations further illustrate the strong overlap of the words that appears in both datasets and demonstrate the importance of vectorizing the tweets with representations other than Bag of Words, which consists of a collection of unigrams or singular words. It is unable to capture phrases and multiword expressions
 
 *Here is the initial target variable distribution with the Davidson dataset with 23353 non-hate tweets and 1430 hate tweets.*
 
-<img src="images/target_distribution.png">
+<center><img src="images/target_distribution.png"></center>
 
 I incorporated additional minority class tweets from three additional dataset: Aristotle University, University of Copenhagen, and HASOC 2019.  I looked for diversity in choosing the dataset to increase the generalizability of the model.
   
-**Modeling:**
+# Modeling:
+
+I selected the six models in my vanilla  based on the papers I reviewed prior to undergoing this project.
 
 *With Unbalanced Dataset:*
+
 1. Multinomial Naive Bayes
 2. Random Forest
 3. Logistic Regression
@@ -85,11 +86,20 @@ I incorporated additional minority class tweets from three additional dataset: A
 
 The new balanced dataset contained 23353 non-hate tweets and 11784 hate tweets.
 
-**Results:**:
+# Results:
 
-With the balanced dataset, 
+With the balanced dataset, at a baseline accuracy of 78%, the best models (Random Forest, Logistic Regression, and SVM) improved accuracy to around 92%. In terms of other metrics, they exhibited the highest F1 scores at around 87-88%, but do not have the highest recall or precision scores.  They also have the highest ROC-AUC scores at around 96% and PR-AUC scores at around 95%.
 
-**References:**
+<center><img src="images/metrics.png"></center>
+
+
+# Next Steps:
+
+- Exploring additional models that involve word embeddings, Doc2Vec, Word2Vec, Gensim, GloVe
+- Using SpaCy for preprocessing
+- Applying neural networks for classification (CNN)
+
+# References:
 
 Davidson, T., Warmsley, D., Macy, M., & Weber, I. (2017). Automated Hate Speech Detection and the Problem of Offensive Language. ICWSM.
 

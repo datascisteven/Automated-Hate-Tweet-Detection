@@ -51,48 +51,6 @@ def tweets_request(tweets_ids):
     
     return pd.concat(df_lst)
 
-
-def accuracy(y, y_hat):
-    """
-        Function to calculate accuracy score
-        where y is original labels and y_hat is predicted labels
-    """
-    y_y_hat = list(zip(y, y_hat))
-    tp = sum([1 for i in y_y_hat if i[0] == 1 and i[1] == 1])
-    tn = sum([1 for i in y_y_hat if i[0] == 0 and i[1] == 0])
-    return (tp + tn) / float(len(y_y_hat))
-
-def f1(y, y_hat):
-    """
-        Function to calculate F1 score from precision and recall
-        where y is original labels and y_hat is predicted labels
-    """
-    precision_score = precision(y, y_hat)
-    recall_score = recall(y, y_hat)
-    numerator = precision_score * recall_score
-    denominator = precision_score + recall_score
-    return 2 * (numerator / denominator)
-
-def precision(y, y_hat):
-    """
-        Function to calculate precision score
-        where y is original labels and y_hat is predicted labels
-    """
-    y_y_hat = list(zip(y, y_hat))
-    tp = sum([1 for i in y_y_hat if i[0] == 1 and i[1] == 1])
-    fp = sum([1 for i in y_y_hat if i[0] == 0 and i[1] == 1])
-    return tp / float(tp + fp)
-
-def recall(y, y_hat):
-    """
-        Function to calculate recall score
-        where y is original labels and y_hat are predicted labels
-    """
-    y_y_hat = list(zip(y, y_hat))
-    tp = sum([1 for i in y_y_hat if i[0] == 1 and i[1] == 1])
-    fn = sum([1 for i in y_y_hat if i[0] == 1 and i[1] == 0])
-    return tp / float(tp + fn)
-
 def auc(X, y, model):
     """
         Function to calculate ROC-AUC Score based on predict_proba(X)
@@ -127,10 +85,8 @@ def aps2(X, y, model):
 
 def get_metrics_confusion(X, y, y_pred, model):
     """
-        Function to get accuracy, F1, ROC-AUC, recall, precision, PR-AUC scores
-        FOllowed by confusoon 
-        Pass X_train, y_train, X_val, Y_val datasets
-        Pass in calculated model.predict(X) for y_pred
+        Function to get accuracy, F1, ROC-AUC, recall, precision, PR-AUC scores followed by confusion matrix
+        where X is feature dataset, y is target dataset, and model is instantiated model variable
     """
     acc = accuracy_score(y, y_pred)
     f1 = f1_score(y, y_pred)
