@@ -62,7 +62,9 @@ I incorporated additional minority class tweets from three additional dataset: A
   
 # Modeling:
 
-I selected the six models in my vanilla  based on the papers I reviewed prior to undergoing this project.
+I selected these six following algorithms for my vanilla model based on models in my vanilla based on the papers I was reviewing prior to undergoing this project:
+
+Logistic Regression serves as my baseline algorithm in all my classification models.  Both Naive Bayes and SVM are commonly used algorithms in the text classification sphere. 
 
 *With Unbalanced Dataset:*
 
@@ -96,8 +98,8 @@ With the balanced dataset, at a baseline accuracy of 78%, the best models (Rando
 # Next Steps:
 
 - Exploring additional models that involve word embeddings, Doc2Vec, Word2Vec, Gensim, GloVe
-- Using SpaCy for preprocessing
 - Applying neural networks for classification (CNN)
+- Exploring using SpaCy for deploying model
 
 # References:
 
