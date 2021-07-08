@@ -101,6 +101,40 @@ With the balanced dataset, at a baseline accuracy of 78%, the best models (Rando
 - Applying neural networks for classification (CNN)
 - Exploring using SpaCy for deploying model
 
+
+# Folder Structure:
+
+	├── README.md                    <- the top-level README for reviewers of this project
+	├── _notebooks                   <- folder containing all the project notebooks
+	│   ├── balanced_modeling.ipynb  <- notebook for modeling with balanced dataset
+    │   ├── balanced.ipynb           <- notebook for developing more balanced dataset
+	│   ├── modeling_advanced.ipynb	<- notebook for implementing more advanced NLP techniques
+	│   ├── modeling.ipynb           <- notebook for modeling with original dataset and resampling methods
+	│   ├── preprocessing.ipynb      <- notebook for models with dataset post-augmentations
+	│   ├── spacy.ipynb              <- notebook for implementing SpaCy
+	│   └── twitter_api.ipynb        <- py file with self-defined functions
+	├── Final_Notebook.ipynb         <- final notebook for capstone project
+	├── _data                        <- folder of csv files (csv)
+	│   ├── _metrics                 <- folder containing metrics dataframes
+	│   └── _original                <- folder containing original datasets
+	├── _images                      <- folder containing visualizations
+	├── _pickle    						<- folder of pickle files 
+	└── _py            					<- folder containing user-defined functions
+
+
+# Contact Information:
+
+**Steven Yan**
+
+<img src="images/mail_icon.png" width="20"> **Email:**  [stevenyan@uchicago.edu][1]
+
+<img src="images/linkedin_icon.png" width="20"> **LinkedIn:**   [https://www.linkedin.com/in/datascisteven][2]
+
+<img src="images/github_icon.png" width="20"> **Github:**  [https://www.github.com/datascisteven][3]
+
+
+
+
 # References:
 
 Davidson, T., Warmsley, D., Macy, M., & Weber, I. (2017). Automated Hate Speech Detection and the Problem of Offensive Language. ICWSM.
@@ -116,4 +150,6 @@ Aristotle University Dataset:  Founta, A., Djouvas, C., Chatzakou, D., Leontiadi
 University of Copenhagen Dataset:  Waseem, Z., Hovy, D. (2016). Hateful Symbols or Hateful People? Predictive Features for Hate Speech Detection on Twitter \[Data file\]. In: *Proceedings of the NAACL Student Research Workshop*. San Diego, Calfornia: Association for Computational Linguistics, pages 88-93. Retrieved from: https://github.com/ZeerakW/hatespeech.
 
 
-
+[1]:	mailto:stevenyan@uchicago.edu
+[2]:	https://www.linkedin.com/in/datascisteven
+[3]:	https://www.github.com/datascisteven
