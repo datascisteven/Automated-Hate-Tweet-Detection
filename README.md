@@ -106,27 +106,28 @@ With the balanced dataset, at a baseline accuracy of 78%, the best models (Rando
 
 # Folder Structure:
 
-	├── README.md                    <- the top-level README for reviewers of this project
-	├── _notebooks                   <- folder containing all the project notebooks
-	│   ├── balanced_modeling.ipynb  <- notebook for modeling with balanced dataset
-    │   ├── balanced.ipynb           <- notebook for developing more balanced dataset
-	│   ├── modeling_advanced.ipynb	<- notebook for implementing more advanced NLP techniques
-	│   ├── modeling.ipynb           <- notebook for modeling with original dataset and resampling methods
-	│   ├── preprocessing.ipynb      <- notebook for models with dataset post-augmentations
-	│   ├── spacy.ipynb              <- notebook for implementing SpaCy
-	│   └── twitter_api.ipynb        <- py file with self-defined functions
-	├── Final_Notebook.ipynb         <- final notebook for capstone project
-	├── _data                        <- folder of csv files (csv)
-	│   ├── _metrics                 <- folder containing metrics dataframes
-	│   └── _original                <- folder containing original datasets
-	├── _images                      <- folder containing visualizations
-	├── _pickle    						<- folder of pickle files 
-	└── _py            					<- folder containing user-defined functions
+	├── README.md            	        <- the top-level README for reviewers of this project
+	├── _notebooks      	             	<- folder containing all the project notebooks
+	│   ├── balanced_modeling.ipynb		<- notebook for modeling with balanced dataset
+    	│   ├── balanced.ipynb           	<- notebook for developing more balanced dataset
+	│   ├── modeling_advanced.ipynb	 	<- notebook for implementing more advanced NLP techniques
+	│   ├── modeling.ipynb           	<- notebook for modeling with original dataset and resampling methods
+	│   ├── preprocessing.ipynb      	<- notebook for models with dataset post-augmentations
+	│   ├── spacy.ipynb              	<- notebook for implementing SpaCy
+	│   └── twitter_api.ipynb        	<- py file with self-defined functions
+	├── Final_Notebook.ipynb         	<- final notebook for capstone project
+	├── _data                        	<- folder of csv files (csv)
+	│   ├── _metrics                 	<- folder containing metrics dataframes
+	│   └── _original                	<- folder containing original datasets
+	├── _images                      	<- folder containing visualizations
+	├── _pickle    			 	<- folder of pickle files 
+	└── _py				 	<- folder containing user-defined functions
 
 
 # Contact Information:
 
-**Steven Yan**
+<center><img src="images/headshot.png"></center>
+<strong><center><font size="8">Steven Yan</font></center></strong>
 
 <img src="images/mail_icon.png" width="20"> **Email:**  [stevenyan@uchicago.edu][1]
 
