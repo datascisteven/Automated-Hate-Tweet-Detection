@@ -107,9 +107,9 @@ With the balanced dataset, at a baseline accuracy of 78%, the best models (Rando
 # Folder Structure:
 
 	├── README.md            	        <- the top-level README for reviewers of this project
-	├── _notebooks      	             	<- folder containing all the project notebooks
+	├── _notebooks      	            <- folder containing all the project notebooks
 	│   ├── balanced_modeling.ipynb		<- notebook for modeling with balanced dataset
-    	│   ├── balanced.ipynb           	<- notebook for developing more balanced dataset
+    │   ├── balanced.ipynb              <- notebook for developing more balanced dataset
 	│   ├── modeling_advanced.ipynb	 	<- notebook for implementing more advanced NLP techniques
 	│   ├── modeling.ipynb           	<- notebook for modeling with original dataset and resampling methods
 	│   ├── preprocessing.ipynb      	<- notebook for models with dataset post-augmentations
@@ -120,13 +120,12 @@ With the balanced dataset, at a baseline accuracy of 78%, the best models (Rando
 	│   ├── _metrics                 	<- folder containing metrics dataframes
 	│   └── _original                	<- folder containing original datasets
 	├── _images                      	<- folder containing visualizations
-	├── _pickle    			 	<- folder of pickle files 
-	└── _py				 	<- folder containing user-defined functions
+	├── _pickle    			 	        <- folder of pickle files 
+	└── _py				 	            <- folder containing py files
 
 
 # Contact Information:
 
-<center><img src="images/headshot.png"></center>
 <strong><center><font size="8">Steven Yan</font></center></strong>
 
 <img src="images/mail_icon.png" width="20"> **Email:**  [stevenyan@uchicago.edu][1]
