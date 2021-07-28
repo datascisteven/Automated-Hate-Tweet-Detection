@@ -17,6 +17,31 @@ from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 import matplotlib.pyplot as plt
 
+def accuracy(y, y_hat):
+    y_y_hat = list(zip(y, y_hat))
+    tp = sum([1 for i in y_y_hat if i[0] == 1 and i[1] == 1])
+    tn = sum([1 for i in y_y_hat if i[0] == 0 and i[1] == 0])
+    return (tp + tn) / float(len(y_y_hat))
+
+def f1(y, y_hat):
+    precision_score = precision(y, y_hat)
+    recall_score = recall(y, y_hat)
+    numerator = precision_score * recall_score
+    denominator = precision_score + recall_score
+    return 2 * (numerator / denominator)
+
+def precision(y, y_hat):
+    y_y_hat = list(zip(y, y_hat))
+    tp = sum([1 for i in y_y_hat if i[0] == 1 and i[1] == 1])
+    fp = sum([1 for i in y_y_hat if i[0] == 0 and i[1] == 1])
+    return tp / float(tp + fp)
+
+def recall(y, y_hat):
+    # Your code here
+    y_y_hat = list(zip(y, y_hat))
+    tp = sum([1 for i in y_y_hat if i[0] == 1 and i[1] == 1])
+    fn = sum([1 for i in y_y_hat if i[0] == 1 and i[1] == 0])
+    return tp / float(tp + fn)
 
 def group_list(lst, size=100):
     """
@@ -151,12 +176,14 @@ def get_metrics_2(X, y, y_pred, model):
     f1 = f1_score(y, y_pred)
     rc = recall_score(y, y_pred)
     pr = precision_score(y, y_pred)
+    rocauc = auc2(X, y, model)
     prauc = aps2(X, y, model)
     
     print('Accuracy: ', ac)
     print('F1: ', f1)
     print('Recall: ', rc)
     print('Precision: ', pr)
+    print('ROC-AUC: ', rocauc)
     print('PR-AUC: ', prauc)
 
 def get_metrics_3(X, y, y_pred, model):

@@ -42,6 +42,15 @@ This HASOC or Hate Speech and Offensive Content dataset was part of a multinatio
 
 # Data Understanding:
 
+What are the challenges in dealing with tweets:
+
+Inconsistent use of grammar, proper spelling, punctuation, and capitalization
+Repetition of same ch1aracter, and use of random abbreviations makes tokenization and POS tagging difficult
+Use of special characters, i.e. emojis, emoticons, hashtags
+
+
+
+
 *Here are the visualizations for the top 25 tokens for training hate and non-hate tweets:*
 
 <center><img src="images/freq_dist_zero.png"></center>
@@ -112,12 +121,12 @@ With the balanced dataset, at a baseline accuracy of 78%, the best models (Rando
 	├── _notebooks      	            <- folder containing all the project notebooks
 	│   ├── balanced_modeling.ipynb		<- notebook for modeling with balanced dataset
     │   ├── balanced.ipynb              <- notebook for developing more balanced dataset
+    │   ├── flask.ipynb                 <- notebook for setup to deploy on Flask
 	│   ├── modeling_advanced.ipynb	 	<- notebook for implementing more advanced NLP techniques
 	│   ├── modeling.ipynb           	<- notebook for modeling with original dataset and resampling methods
 	│   ├── preprocessing.ipynb      	<- notebook for models with dataset post-augmentations
-	│   ├── spacy.ipynb              	<- notebook for implementing SpaCy
 	│   └── twitter_api.ipynb        	<- py file with self-defined functions
-	├── Final_Notebook.ipynb         	<- final notebook for capstone project
+	├── Final_Notebook.ipynb         	<- final notebook for project
 	├── _data                        	<- folder of csv files (csv)
 	│   ├── _metrics                 	<- folder containing metrics dataframes
 	│   └── _original                	<- folder containing original datasets
