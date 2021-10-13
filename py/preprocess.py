@@ -69,7 +69,7 @@ def preprocess(tweet):
     result = re.sub(r'\s\s+', ' ', result)
     result = re.sub(r'(\A\s+|\s+\Z)', '', result)
     result = tokenize(result)
-    return result 
+    return list(result)
 
 def lemmatize(token):
     return WordNetLemmatizer().lemmatize(token, pos='v')

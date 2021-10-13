@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+  <title>Hate Tweet Detector</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+  <link rel="icon" type="image/png" href="static/images/icons/twitter-china.jpeg"/>
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="static/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="static/vendor/animate/animate.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="static/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="static/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="static/css/util.css">
+  <link rel="stylesheet" type="text/css" href="static/css/main.css">
+<!--===============================================================================================-->
+</head>
+
+<body>
+
+  <style>
+    body{
+      background-size: auto;
+      background-position: 95% 10%, 5% 10%;
+      /* background-position: right center, left center; */
+      background-size: 20%;
+      background-attachment: inherit;
+      background-repeat: no-repeat, no-repeat;
+      background-color: #E6E2E1;
+    }
+    h1 { color: #18BEF5; }
+  </style>
+
+  <div id="example1" class="limiter">
+    <div class="container-table100">
+      <div class="wrap-table100">
+        <div class="table100">
+          <div style="max-width:25%; margin-left: auto; margin-right: auto;">
+            <center>
+              
+            </center>
+          </div>
+
+  <form action="/">
+    <div style="text-align: center;">
+      <br>
+        <h1>Hate Tweet Classifier</h1>
+        <br>
+        Would you classify this as a hate or non-hate tweet?  See if you pass muster against an automated tweet detector.
+        <br>
+        <br>
+        <center>
+          <input align = "center" type="text" name="chat_in" autofocus="autofocus" value="{{x_input}}" maxlength="500" id="rcorners2" placeholder="Enter tweet text here">
+        </center>
+    <br>
+    <!-- Submit button -->
+    <center>
+    <input align="center" type="submit" value="Predict" method="get" id="rcorners1">
+  </center>
+    <br>
+
+  </form>
+    </div>
+    <!-- {% for p in prediction %}
+      <br>  {{p['name']}}:{{ (100*p['prob']) | round }}%
+    {% endfor %} -->
+  </p>
+          <br>
+          <table>
+            <thead>
+              <tr class="table100-head">
+                <th class="column1">Tweet Input</th>
+                <th colspan="2" class="column1">Prediction and Hate Probability</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td rowspan="6" class="column1">{{ chat_in }}</td>
+                  <!-- <td rowspan="6" class="column1">{{ chat_in }}</td> -->
+                  <td class="column1">{{ prediction_class }}</td>
+                  <td class="column2">{{ prediction_prob }}%</td>
+                </tr>
+                
+                
+            </tbody>
+          </table>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          
+          <div style="text-align: center; color: #808080;">
+          Built by <a href="https://datascisteven.github.io">Steven Yan</a> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!--===============================================================================================-->
+  <script src="static/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+  <script src="static/vendor/bootstrap/js/popper.js"></script>
+  <script src="static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+  <script src="static/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+  <script src="static/js/main.js"></script>
+
+</body>
+</html>

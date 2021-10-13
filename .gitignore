@@ -122,3 +122,10 @@ dmypy.json
 .DS_Store
 /.vscode
 spaCy/
+/pickle/
+
+/Hate-Tweet-Flask/static/vendor/
+/Hate-Tweet-Flask/static/fonts/
+Hate-Tweet-Flask/requirements.txt
+Hate-Tweet-Flask/Procfile
+Hate-Tweet-Flask/nltk.txt
