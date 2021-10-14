@@ -4,7 +4,12 @@
 
 *This project builds off of my joint project with Ivan Zarharchuk,  Twitter-Sentiment-Analysis, located <a href="https://github.com/datascisteven/Twitter-Sentiment-Analysis">here</a>.*  
 
-<img src="images/hate_tweet.jpg">
+# Flask App Screenshots
+
+<img src="images/hate_tweet_example.png">
+
+<img src="images/non_hate_tweet_example.png">
+
 
 # Introduction:
 
