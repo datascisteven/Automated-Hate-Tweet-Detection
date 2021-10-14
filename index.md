@@ -1,6 +1,6 @@
 <h1><center><font size="6">Developing a Hate Tweet Detector</font></center></h1>
 
-**Author:**  Steven Yan
+<h2><center><font size="5">by Steven Yan</font></center></h2>
 
 *This project builds off of my joint project with Ivan Zarharchuk,  Twitter-Sentiment-Analysis, located <a href="https://github.com/datascisteven/Twitter-Sentiment-Analysis">here</a>.*  
 
