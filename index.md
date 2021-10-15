@@ -1,22 +1,26 @@
-<h1><center><font size="6">Developing a Hate Tweet Detector</font></center></h1>
+<h1><center><font size="6">Developing a Hate Tweet Detector with NLTK and Flask<br>
+	by Steven Yan</font></center></h1>
 
-<h2><center><font size="5">by Steven Yan</font></center></h2>
 
-*This project builds off of my joint project with Ivan Zarharchuk,  Twitter-Sentiment-Analysis, located <a href="https://github.com/datascisteven/Twitter-Sentiment-Analysis">here</a>.*  
 
-# Flask App Screenshots
+## Flask App Interface:
 
+
+<center>
 <img src="images/hate_tweet_example.png">
-
+<figcaption>Screenshot with Hate Tweet Classified</figcaption>
+<br>
 <img src="images/non_hate_tweet_example.png">
-
-
+<figcaption>Screenshot with Non-Hate Tweet Classified</figcaption>
+</center>
+	
+The Flask implementation will be discussed in depth further below.
 
 # Introduction:
 
 Why should we care about regulating or detecting hate speech in the first place?  All democracies are in agreement that hate speech that incites violence or harm towards another group should be prohibited.  For Americans, who believe in the fundamental right to freedom of speech as afforded by the Constitution, regulating hate speech that is degrading of groups of people has not been and cannot be regulated. A recent NYU study from 2019 has found a direct link between the number of racist tweets and real-life hate crimes in 100 US cities, and Twitter has been hugely criticized for being complacent in curbing hate speech on their platform.  Democracies around the world take much more stringent measures against curbing hate speech than the United States because laws criminalizing such speech would violate the guarantee to the rights afforded to its citizens by the 1st Amendment.  Recent events have demonstrated how words have the power to incite others violence, namely the insurrection against one of our own institutions at the Capital on January 6th.  We have also seen the recent rise in Asian-American hate crime throughout the nation culminating in the Atlanta shooting due to the incessant invocation of words associating COVID with China like "Kung-flu" or "Chinavirus" by our top officials.
 
-# Business Understanding
+# Business Understanding:
 
 In Facebook's Community Standards Enforcement Report 4th Quarter 2020, it was reported that 97% of hate speech was preemeptively detected and taken down before any human flagging.  This is an increase from 94% in the 3rd quarter and 80.5% in 2019.  In terms of prevalence, as of early 2021, only 5 or 6 out of 10,000 views contained any violating content as per Facebook's guidelines.  96.8% of hate content is found via Facebook's AI algorithm as of the beginning of 2021, an increase from 89.2% in the beginning of 2020, 68.7% 2019, and 38% 2018.
 
@@ -25,6 +29,9 @@ What is shocking is the amount of hate content Facebook has taken action on over
 A key challenge in the automated detection of hate speech is differentiating between hate speech and offensive language. Hate speech is defined as public speech that expresses hate, disparages, or incites or encourages violence against another individual or group based on some characteristic such as race, gender, religious belief, sexual orientation, etc.  Even that exact definition can differ from region to region or country to country.  It is essential that we recognize that even the same hate or derogatory word can have or  and definitely from context to context. Even the ever-pervasive 4 letter f-word easily demonstrates this ambiguity:  "f@!k the (insert ethnic group), they need to go back where they came from" vs. "fuck my life and everyone in it, i work so hard but get no where. #f@!&mylife". In the former, the word is used to express hate towards an ethnic group, but in the latter, it is more of an expression of when things don't go right or how you would have expected it to.  If you look at the word f****t,the derogatory term for homosexuals, reclaiming the word from its more negative connotation into an expression of playfulness even pride has been an important step in their personal identity journey.
 
 Sparked by the alarming nature of recent events, social media platforms have already implemented algorithms to regulate or remove hate tweets, and having the ability to differentiate between hate versus non-hate is an integral part of any model.
+
+<center><img src="images/hate_tweet.jpg"></center>
+
 
 # Data Sources:
 
@@ -48,16 +55,16 @@ This HASOC or Hate Speech and Offensive Content dataset was part of a multinatio
 
 # Data Understanding:
 
-What are the challenges in dealing with tweets:
+**What are some of the challenges in dealing with tweets?**
 
-Inconsistent use of grammar, proper spelling, punctuation, and capitalization
-Repetition of same ch1aracter, and use of random abbreviations makes tokenization and POS tagging difficult
-Use of special characters, i.e. emojis, emoticons, hashtags
+- Inconsistent use of grammar, proper spelling, punctuation, and capitalization
+- Repetition of same ch1aracter, and use of random abbreviations makes tokenization and POS tagging difficult
+- Use of special characters, i.e. emojis, emoticons, hashtags
+
+Must be considered when coming up with preprocessing function for tweets.
 
 
-
-
-*Here are the visualizations for the top 25 tokens for training hate and non-hate tweets:*
+**What are the top 25 tokens for hate and non-hate tweets?**
 
 <center><img src="images/freq_dist_zero.png"></center>
  
@@ -68,6 +75,8 @@ Some of the top words in the negative class are: 'bitch', 'hoe', 'pussy', 'fuck'
 'bitch' appears in a much greater proportion in non-hate tweets in over 8000 tweets out of 17514 tweets versus just over 200 out of 1072 tweets. 'trash' appears in non-hate subset without 'white', but 'white' and 'trash' appears in somewhat equal proportion in the hate subset.
 
 The following words, 'nigger(s)', 'white' ('trash'), 'retard', 'queer', 'gay', 'fag' and 'faggot', 'hate' are almost exclusively in the positive class.
+
+**How can we visualize the datasets in graphical form?**
 
 <center><img src="images/tsne.png"></center>
 
@@ -124,10 +133,10 @@ With the balanced dataset, at a baseline accuracy of 78%, the best models (Rando
 # Folder Structure:
 
 	├── README.md            	        <- the top-level README for reviewers of this project
-	├── _notebooks      	            <- folder containing all the project notebooks
+	├── _notebooks      	            	<- folder containing all the project notebooks
 	│   ├── balanced_modeling.ipynb		<- notebook for modeling with balanced dataset
-    │   ├── balanced.ipynb              <- notebook for developing more balanced dataset
-    │   ├── flask.ipynb                 <- notebook for setup to deploy on Flask
+    	│   ├── balanced.ipynb              	<- notebook for developing more balanced dataset
+  	│   ├── flask.ipynb                 	<- notebook for setup to deploy on Flask
 	│   ├── modeling_advanced.ipynb	 	<- notebook for implementing more advanced NLP techniques
 	│   ├── modeling.ipynb           	<- notebook for modeling with original dataset and resampling methods
 	│   ├── preprocessing.ipynb      	<- notebook for models with dataset post-augmentations
@@ -135,12 +144,11 @@ With the balanced dataset, at a baseline accuracy of 78%, the best models (Rando
 	├── Final_Notebook.ipynb         	<- final notebook for project
 	├── _data                        	<- folder of csv files (csv)
 	│   ├── _metrics                 	<- folder containing metrics dataframes
+	│   ├── _pickle    			<- folder of pickle files 
 	│   └── _original                	<- folder containing original datasets
+	├── _Hate-Tweet-Flask                   <- folder containing Flask app	
 	├── _images                      	<- folder containing visualizations
-	├── _pickle    			 	        <- folder of pickle files 
-	└── _py				 	            <- folder containing py files
-
-
+	└── _py				 	<- folder containing py files
 
 
 
@@ -162,7 +170,7 @@ Facebook's Community Standards Enforcement Report (Q1 2021 Report): https://tran
 
 Much thanks and acknowledgement to <a href="https://joeygoodman.us/">Joey Goodman</a> for his front-end code.
 
-
+*This project builds off of my joint project with Ivan Zarharchuk,  Twitter-Sentiment-Analysis, located <a href="https://github.com/datascisteven/Twitter-Sentiment-Analysis">here</a>.*  
 
 # Contact Information:
 
