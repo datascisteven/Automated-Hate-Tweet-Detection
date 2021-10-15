@@ -132,23 +132,23 @@ With the balanced dataset, at a baseline accuracy of 78%, the best models (Rando
 
 # Folder Structure:
 
-	├── README.md            	        <- the top-level README for reviewers of this project
-	├── _notebooks      	            	<- folder containing all the project notebooks
+	├── README.md				<- the top-level README for reviewers of this project
+	├── __notebooks				<- folder containing all the project notebooks
 	│   ├── balanced_modeling.ipynb		<- notebook for modeling with balanced dataset
-    	│   ├── balanced.ipynb              	<- notebook for developing more balanced dataset
-  	│   ├── flask.ipynb                 	<- notebook for setup to deploy on Flask
-	│   ├── modeling_advanced.ipynb	 	<- notebook for implementing more advanced NLP techniques
-	│   ├── modeling.ipynb           	<- notebook for modeling with original dataset and resampling methods
-	│   ├── preprocessing.ipynb      	<- notebook for models with dataset post-augmentations
-	│   └── twitter_api.ipynb        	<- py file with self-defined functions
-	├── Final_Notebook.ipynb         	<- final notebook for project
-	├── _data                        	<- folder of csv files (csv)
-	│   ├── _metrics                 	<- folder containing metrics dataframes
-	│   ├── _pickle    			<- folder of pickle files 
-	│   └── _original                	<- folder containing original datasets
-	├── _Hate-Tweet-Flask                   <- folder containing Flask app	
-	├── _images                      	<- folder containing visualizations
-	└── _py				 	<- folder containing py files
+	│   ├── balanced.ipynb			<- notebook for developing more balanced dataset
+	│   ├── flask.ipynb			<- notebook for setup to deploy on Flask
+	│   ├── modeling_advanced.ipynb		<- notebook for implementing more advanced NLP techniques
+	│   ├── modeling.ipynb			<- notebook for modeling with original dataset and resampling methods
+	│   ├── preprocessing.ipynb		<- notebook for models with dataset post-augmentations
+	│   └── twitter_api.ipynb		<- notebook for downloading tweets
+	├── Final_Notebook.ipynb		<- final notebook for project
+	├── __data				<- folder of csv files (csv)
+	│   ├── __metrics			<- folder containing metrics dataframes
+	│   ├── __pickle    			<- folder of pickle files 
+	│   └── __original                	<- folder containing original datasets
+	├── __Hate-Tweet-Flask			<- folder containing Flask app	
+	├── __images				<- folder containing visualizations
+	└── __py				<- folder containing py files
 
 
 
@@ -168,9 +168,14 @@ University of Copenhagen Dataset:  Waseem, Z., Hovy, D. (2016). Hateful Symbols 
 
 Facebook's Community Standards Enforcement Report (Q1 2021 Report): https://transparency.fb.com/data/community-standards-enforcement/?from=https%3A%2F%2Ftransparency.facebook.com%2Fcommunity-standards-enforcement
 
-Much thanks and acknowledgement to <a href="https://joeygoodman.us/">Joey Goodman</a> for his front-end code.
 
-*This project builds off of my joint project with Ivan Zarharchuk,  Twitter-Sentiment-Analysis, located <a href="https://github.com/datascisteven/Twitter-Sentiment-Analysis">here</a>.*  
+# Acknowledgements:
+
+Thanks to <a href="https://joeygoodman.us/">Joey Goodman</a> for the majority of the front-end code in the Flask implementation.
+
+This project builds off of my joint project with Ivan Zarharchuk,  Twitter-Sentiment-Analysis, located <a href="https://github.com/datascisteven/Twitter-Sentiment-Analysis">here</a>.
+
+
 
 # Contact Information:
 
