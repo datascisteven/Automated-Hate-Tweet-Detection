@@ -30,8 +30,6 @@
 
 <p>Sparked by the alarming nature of recent events, social media platforms have already implemented algorithms to regulate or remove hate tweets, and having the ability to differentiate between hate versus non-hate is an integral part of any model.</p>
 
-<center><img src="images/hate_tweet.jpg"></center>
-
 
 # Data Sources:
 
@@ -160,8 +158,7 @@ Founta, A., Djouvas, C., Chatzakou, D., Leontiadis, I., Blackburn, J., Stringhin
 
 Waseem, Z., & Hovy, D. (2016). Hateful Symbols or Hateful People? Predictive Features for Hate Speech Detection on Twitter. SRW@HLT-NAACL. [https://www.aclweb.org/anthology/N16-2013.pdf](https://www.aclweb.org/anthology/N16-2013.pdf)
 
-Mandl, T., Modha, S., Majumder, P., Patel, D., Dave, M., Mandalia, C., & Patel, A. (2019). Overview of the HASOC track at FIRE 2019: Hate Speech and Offensive Content Identification in Indo-European Languages. Proceedings of the 11th Forum for Information Retrieval Evaluation. [http://ceur-ws.org/Vol-2517/T3-1.pdf]
-(http://ceur-ws.org/Vol-2517/T3-1.pdf)
+Mandl, T., Modha, S., Majumder, P., Patel, D., Dave, M., Mandalia, C., & Patel, A. (2019). Overview of the HASOC track at FIRE 2019: Hate Speech and Offensive Content Identification in Indo-European Languages. Proceedings of the 11th Forum for Information Retrieval Evaluation. [http://ceur-ws.org/Vol-2517/T3-1.pdf](http://ceur-ws.org/Vol-2517/T3-1.pdf)
 
 Aristotle University Dataset:  Founta, A., Djouvas, C., Chatzakou, D., Leontiadis, I., Blackburn, J., Stringhini, G., Vakali, A., Sirivianos, M. and Kourtellis, N., 2018. Large Scale Crowdsourcing and Characterization of Twitter Abusive Behavior \[Data file\]. ArXiv. Retrieved from: [https://dataverse.mpi-sws.org/dataset.xhtml?persistentId=doi:10.5072/FK2/ZDTEMN](https://dataverse.mpi-sws.org/dataset.xhtml?persistentId=doi:10.5072/FK2/ZDTEMN)
 
