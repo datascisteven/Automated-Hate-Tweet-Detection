@@ -1,7 +1,9 @@
 <h1><center><font size="6">Developing a Hate Tweet Detector with NLTK and Flask<br>
 	by Steven Yan</font></center></h1>
 
+## Heroku App:
 
+[Tweet Detector App](https://hate-tweet-detector.herokuapp.com/)
 
 ## Flask App Interface:
 
