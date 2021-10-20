@@ -1,7 +1,9 @@
 import re
 import sys
+import nltk
 sys.path.append("../py")
-import gensim
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
 
@@ -34,15 +36,13 @@ def lemmatize(token):
 def tokenize(tweet):
     """Returns tokenized representation of words in lemma form excluding stopwords"""
     result = []
-    for token in gensim.utils.simple_preprocess(tweet):
-        if token not in gensim.parsing.preprocessing.STOPWORDS \
-                and len(token) > 2:  # drops words with less than 3 characters
+    stop_words = set(stopwords.words('english'))
+    word_tokens = word_tokenize(tweet)
+    for token in word_tokens:    
+        if token.lower not in stop_words and len(token) > 2:  # drops words with less than 3 characters
             result.append(lemmatize(token))
     return result
 
-def tokenize_and_lemmatize(df, col):
-    df[col] = df[col].apply(lambda x: tokenize(x))
-    return df
 
 def preprocess_tweets(df, col):
     """master function to preprocess tweets"""
@@ -71,16 +71,7 @@ def preprocess(tweet):
     result = tokenize(result)
     return list(result)
 
-def lemmatize(token):
-    return WordNetLemmatizer().lemmatize(token, pos='v')
 
-def tokenize(tweet):
-    result = []
-    for token in gensim.utils.simple_preprocess(tweet):
-        if token not in gensim.parsing.preprocessing.STOPWORDS and len(token) > 2:  # drops stopwords and words with <3 characters
-            result.append(lemmatize(token))
-    result = ' '.join(result)
-    return result
 
 
 

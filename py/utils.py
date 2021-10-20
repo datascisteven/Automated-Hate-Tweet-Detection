@@ -216,18 +216,7 @@ def avg_word(sentence):
 def avg_word_length(df, col):
     df['avg_wrd'] = df[col].apply(lambda x: avg_word(x))
     print(df[[col, 'avg_wrd']].head())
-
-
-def tokenize(df, col):
-    """
-        Function to tokenize column of strings without punctuation
-        Input into word_tokenize() must be string with spaces only
-        Output is a list of tokenized words
-    """
-    text = ' '.join(df[col].to_list())
-    tokens = nltk.word_tokenize(text)
-    return tokens
-
+    
 
 stop_words = set(stopwords.words('english'))
 def no_stopwords(text):
@@ -248,19 +237,6 @@ def stemming(token_list):
     ss = PorterStemmer()
     lst = [ss.stem(w) for w in token_list]
     return lst
-
-def lemmatization(df):
-    df['lem'] = df['tweet'].apply(lambda x: " ".join([Word(word).lemmatize() for word in x.split()]))
-    return df['lem'].head()
-
-
-def tokenize_tweets(df):
-    """function to read in and return cleaned and preprocessed dataframe"""
-    df['tokens'] = df.tweet.apply(preprocess_tweet)
-    num_tweets = len(df)
-    print('Complete. Number of Tweets that have been cleaned and tokenized : {}'.format(num_tweets))
-    return df
-
 
 def plot_confusion_matrix(cm, title='Confusion matrix', cmap=plt.cm.Blues):
     plt.imshow(cm, interpolation='nearest', cmap=cmap)

@@ -1,21 +1,26 @@
 
 import pickle
 import re
-from nltk.collocations import *
+import nltk
 from nltk.stem.wordnet import WordNetLemmatizer
-import gensim
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+
 
 
 def lemmatize(token):
+    """Returns lemmatization of a token"""
     return WordNetLemmatizer().lemmatize(token, pos='v')
 
 def tokenize(tweet):
+    """Returns tokenized representation of words in lemma form excluding stopwords"""
     result = []
-    for token in gensim.utils.simple_preprocess(tweet):
-        if token not in gensim.parsing.preprocessing.STOPWORDS and len(token) > 2:
+    stop_words = set(stopwords.words('english'))
+    word_tokens = word_tokenize(tweet)
+    for token in word_tokens:    
+        if token.lower not in stop_words and len(token) > 2:  # drops words with less than 3 characters
             result.append(lemmatize(token))
-    res = ' '.join(result)
-    return res
+    return result
 
 def preprocess_tweet(tweet):
     result = re.sub(r'(RT\s@[A-Za-z]+[A-Za-z0-9-_]+)', '', tweet)
@@ -30,7 +35,6 @@ def preprocess_tweet(tweet):
     result = re.sub(r'(\A\s+|\s+\Z)', '', result)
     processed = tokenize(result)
     return processed
-
 
 
 def make_prediction(tweet):
